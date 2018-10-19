@@ -1,0 +1,50 @@
+# Oracle user and group for the operating system
+oracle_user: weblogic
+oracle_group: weblogic
+
+# created with: python -c 'import crypt; print crypt.crypt("This is my Password", "$1$SomeSalt$")'
+# python -c 'import crypt; print crypt.crypt("welcome1", "$1$SomeSalt$")'
+oracle_os_user_pass: '$1$SomeSalt$G3QQJZhBJ4mQVYIddtH3/1'
+
+
+# Vagrant provisioning directory
+# Should be same as in Vagrantfile
+vagrant_provisioning: /vagrant_provisioning
+# Shared software directory
+software_folder: "{{vagrant_provisioning}}/software"
+
+
+# Software and configuration main directory
+oracle_base: /opt/oracle
+middleware_home: "{{ oracle_base }}/product/fmw11.1.1"
+installer_home: "{{ oracle_base }}/installer"
+
+# JDK installer
+jdk_installer: jdk-7u171-linux-x64.rpm
+jdk_home: "/usr/java/jdk1.7.0_171-amd64"
+
+# FMW installer
+mw_installer: wls1036_generic.jar
+mw_installer_folder: "{{ installer_home }}"
+log_prefix: fmw11.1.1
+
+
+# Domain settings
+domain_name: base_domain
+admin_server_name: AdminServer
+weblogic_admin: weblogic
+weblogic_admin_pass: welcome1
+# nodemanager_username: 'weblogic'
+# nodemanager_password: 'welcome1'
+# nodemanager_listen_address: 'localhost'
+# nodemanager_listen_port: '5556'
+# admin_server_listen_address: 'localhost'
+# admin_server_listen_port: '7001'
+
+# Common paths and names
+domains_home: "{{ oracle_base }}/config/domains"
+applications_home: "{{ oracle_base }}/config/applications"
+domain_home: "{{ domains_home }}/{{ domain_name }}"
+# nodemanager_home: '{{ domain_home }}/nodemanager'
+weblogic_home: "{{ middleware_home }}/wlserver_10.3"
+# server_hostname: '{{ ansible_fqdn }}'

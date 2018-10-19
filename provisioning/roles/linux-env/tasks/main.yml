@@ -1,0 +1,33 @@
+# ==> Upgrade all packages
+- name: Upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+# ==> Install tree, this is used for the wls automation demo
+- name: Install tree
+  yum:
+    name: tree
+    state: present
+
+# ==> Create user and group
+- name: Create group
+  group: name={{ oracle_group }} state=present
+- name: Create user
+  user: name={{ oracle_user }} group={{ oracle_group }} password={{ oracle_os_user_pass }}
+
+# ==> Create Base Directories
+- name: Create Middleware Home directory
+  file: state=directory path={{ middleware_home }} owner={{ oracle_user }} group={{ oracle_group }}
+- name: Create Domains Home directory
+  file: state=directory path={{ domains_home }} owner={{ oracle_user }} group={{ oracle_group }}
+- name: Create Applications Home directory
+  file: state=directory path={{ applications_home }} owner={{ oracle_user }} group={{ oracle_group }}
+- name: Create Installer Home directory
+  file: state=directory path={{ installer_home }} owner={{ oracle_user }} group={{ oracle_group }}
+
+# ==> Install JDK package
+- name: Install JDK rpm from local file
+  yum:
+    name: "{{ software_folder }}/{{ jdk_installer }}"
+    state: present

@@ -1,0 +1,11 @@
+# Executed from Vagrant
+# Can be run also manually, as user vagrant, with: `ansible-playbook provisioning.yml -i inventory`
+# Add -v for verbose or -vvv for mode
+---
+- name: Configure CentOS7 with WebLogic 11g - os, folders, jdk, wls 11g
+  hosts: was
+  become: yes
+  roles:
+    - role: linux-env
+    - role: fmw-software
+      become_user: "{{ oracle_user }}"
