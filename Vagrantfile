@@ -47,8 +47,9 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
   config.vm.synced_folder ".", "/vagrant", disabled:true
-  config.vm.synced_folder "./share", "/vagrant_share"
   config.vm.synced_folder "./provisioning", "/vagrant_provisioning", mount_options: ["dmode=775,fmode=664"]
+  config.vm.synced_folder "./software", "/vagrant_software", mount_options: ["dmode=775,fmode=664"]
+  config.vm.synced_folder "./share", "/vagrant_share"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -80,7 +81,7 @@ Vagrant.configure("2") do |config|
     machine.vm.provider "virtualbox" do |vb|
       vb.memory = 4096
       vb.cpus = 2
-      vb.name = "wlsplay_CentOS7_was"
+      vb.name = "wlsplay_CentOS7"
     end
 
     machine.vm.provision "ansible_local" do |ansible|

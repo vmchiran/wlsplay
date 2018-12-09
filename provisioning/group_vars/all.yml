@@ -7,17 +7,22 @@ oracle_group: weblogic
 oracle_os_user_pass: '$1$SomeSalt$G3QQJZhBJ4mQVYIddtH3/1'
 
 
-# Vagrant provisioning directory
-# Should be same as in Vagrantfile
+# Vagrant provisioning directory. Should be same as in Vagrantfile
 vagrant_provisioning: /vagrant_provisioning
-# Shared software directory
-software_folder: "{{vagrant_provisioning}}/software"
+# Shared software directory. Should be same as in Vagrantfile
+software_folder: /vagrant_software
+# Shared directory. Should be same as in Vagrantfile
+share_folder: /vagrant_share
 
 
 # Software and configuration main directory
 oracle_base: /opt/oracle
+
+# Home folders
 middleware_home: "{{ oracle_base }}/product/fmw11.1.1"
 installer_home: "{{ oracle_base }}/installer"
+
+weblogic_home: "{{ middleware_home }}/wlserver_10.3"
 
 # JDK installer
 jdk_installer: jdk-7u171-linux-x64.rpm
@@ -25,26 +30,30 @@ jdk_home: "/usr/java/jdk1.7.0_171-amd64"
 
 # FMW installer
 mw_installer: wls1036_generic.jar
-mw_installer_folder: "{{ installer_home }}"
+mw_installer_mem_arg : "-Xms1024m -Xmx1024m"
 log_prefix: fmw11.1.1
 
 
 # Domain settings
 domain_name: base_domain
 admin_server_name: AdminServer
+domain_user_mem_arg: "-Xms2048m -Xmx2048m -XX:CompileThreshold=8000 -XX:PermSize=128m -XX:MaxPermSize=512m"
 weblogic_admin: weblogic
 weblogic_admin_pass: welcome1
+
+# admin_server_listen_address: 'localhost'
+# admin_server_listen_port: '7001'
+
 # nodemanager_username: 'weblogic'
 # nodemanager_password: 'welcome1'
 # nodemanager_listen_address: 'localhost'
 # nodemanager_listen_port: '5556'
-# admin_server_listen_address: 'localhost'
-# admin_server_listen_port: '7001'
 
 # Common paths and names
 domains_home: "{{ oracle_base }}/config/domains"
-applications_home: "{{ oracle_base }}/config/applications"
 domain_home: "{{ domains_home }}/{{ domain_name }}"
+
+applications_home: "{{ oracle_base }}/config/applications"
+
 # nodemanager_home: '{{ domain_home }}/nodemanager'
-weblogic_home: "{{ middleware_home }}/wlserver_10.3"
 # server_hostname: '{{ ansible_fqdn }}'

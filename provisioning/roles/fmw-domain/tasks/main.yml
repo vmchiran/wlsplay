@@ -1,9 +1,11 @@
-  # ==> Create new domain, set java mem args for the admin server, init security for the admin server
+# ==> Create new domain, set java mem args for the admin server, init security for the admin server
+---
+
 - name: Copy create domain script
-  template: src=create-domain.py dest={{ mw_installer_folder }}
+  template: src=create-domain.py dest={{ installer_home }}
 
 - name: Execute create domain script
-  shell: "{{ weblogic_home }}/common/bin/wlst.sh {{ mw_installer_folder }}/create-domain.py"
+  shell: "{{ weblogic_home }}/common/bin/wlst.sh {{ installer_home }}/create-domain.py"
 
 - name: Insert USER_MEM_ARGS in setDomainEnv.sh
   blockinfile:
@@ -11,7 +13,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     insertafter: "export WL_HOME"
     block: |
-      USER_MEM_ARGS="-Xms2048m -Xmx2048m -XX:CompileThreshold=8000 -XX:PermSize=128m -XX:MaxPermSize=512m"
+      USER_MEM_ARGS="{{ domain_user_mem_arg }}"
       export USER_MEM_ARGS
     backup: yes
 
@@ -20,8 +22,3 @@
 
 - name: Create boot.properties file
   template: src=boot.properties dest={{ domain_home }}/servers/{{ admin_server_name }}/security/
-
-# - name: Execute start Admin Server script
-#   shell: "{{ domain_home }}/startWebLogic.sh"
-# - name: Wait for Admin Server to startup
-#   wait_for: port={{ admin_server_listen_port }} delay=2 timeout=60

@@ -1,9 +1,8 @@
 # ==> Install Fussion Middleware Infrastructure
-- name: Create installer directory
-  file: state=directory path={{ mw_installer_folder }}
+---
 
 - name: Copy file for silent installation
-  template: src=silent.xml dest={{ mw_installer_folder }}
+  template: src=silent.xml dest={{ installer_home }}
 
 - name: Execute WebLogic installer
-  command: "{{ jdk_home }}/bin/java -Xms1024m -Xmx1024m -jar {{ software_folder }}/{{ mw_installer }} -mode=silent -silent_xml={{ mw_installer_folder }}/silent.xml -log={{ mw_installer_folder }}/{{ log_prefix }}.install.log -silent_log={{ mw_installer_folder }}/{{ log_prefix }}.install.silent.log"
+  command: "{{ jdk_home }}/bin/java {{ mw_installer_mem_arg }} -jar {{ software_folder }}/{{ mw_installer }} -mode=silent -silent_xml={{ installer_home }}/silent.xml -log={{ installer_home }}/{{ log_prefix }}.install.log -silent_log={{ installer_home }}/{{ log_prefix }}.install.silent.log"

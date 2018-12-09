@@ -1,3 +1,12 @@
+# Vagrant generated items
 .vagrant
-share
-provisioning/software
+# Installers and packages, for example under software/
+*.ear
+*.jar
+*.rpm
+*.zip
+*.gz
+# Some other file extensions
+*.bak
+# Items from shared folders, shared between Host machine and Guest VM, typically for ad-hoc usage
+share/*/

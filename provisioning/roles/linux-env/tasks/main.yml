@@ -1,3 +1,5 @@
+---
+
 # ==> Upgrade all packages
 - name: Upgrade all packages
   yum:
@@ -15,6 +17,10 @@
   group: name={{ oracle_group }} state=present
 - name: Create user
   user: name={{ oracle_user }} group={{ oracle_group }} password={{ oracle_os_user_pass }}
+
+# ==> Create tmp directory to be used as remote_tmp path. Used by blockinfile module.
+- name: Create tmp ansible directory for oracle_user
+  file: state=directory path="/tmp/ansible-{{ oracle_user }}" owner={{ oracle_user }} group={{ oracle_group }} mode=0700
 
 # ==> Create Base Directories
 - name: Create Middleware Home directory
