@@ -1,0 +1,13 @@
+# Can be run manually, as user vagrant, with: `ansible-playbook wls-11g-domain-setup.yml -i inventory`
+# Add -v for verbose or -vvv for more
+---
+
+- name: Configure CentOS7 with WebLogic 11g domain
+  hosts: was
+  become: yes
+  roles:
+    # Role for creating a base domain
+    - role: fmw-domain-init
+      become_user: "{{ oracle_user }}"
+    # Role for AdminServer as service. Executed as root.
+    - role: fmw-domain-adminserver

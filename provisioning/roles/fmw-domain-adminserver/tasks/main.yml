@@ -1,0 +1,17 @@
+---
+
+- name: Copy wls_adminserver.service script
+  template:
+    src: wls_adminserver.service
+    dest: /usr/lib/systemd/system/wls_adminserver.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload systemctl
+
+- name: Start and enable AdminServer
+  systemd:
+    daemon_reload: yes
+    state: started
+    enabled: yes
+    name: wls_adminserver

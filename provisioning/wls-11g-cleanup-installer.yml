@@ -1,12 +1,13 @@
 # Can be run manually, as user vagrant, with: `ansible-playbook wls-11g-cleanup-installer.yml -i inventory`
-# Add -v for verbose or -vvv for mode
+# Add -v for verbose or -vvv for more
 ---
-- name: Configure CentOS7 with WebLogic 11g domain - cleanup installer folder
+
+- name: Configure CentOS7 with WebLogic 11g domain - cleanup installer_home folder
   hosts: all
   become: yes
   become_user: "{{ oracle_user }}"
   tasks:
-    - name: Delete recursively the installer folder
+    - name: Delete recursively the installer_home folder
       file: 
         path: "{{ installer_home }}"
         state: absent

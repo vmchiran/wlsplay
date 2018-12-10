@@ -75,8 +75,8 @@ Vagrant.configure("2") do |config|
   # SHELL
 
   config.vm.define "was" do |machine|
-    # Running on Ethernet adapter VirtualBox Host-Only Network #2
-    machine.vm.network "private_network", ip: "172.28.128.10"
+    # Running on Ethernet adapter VirtualBox Host-Only Network #3
+    machine.vm.network "private_network", ip: "172.16.0.10"
 
     machine.vm.provider "virtualbox" do |vb|
       vb.memory = 4096

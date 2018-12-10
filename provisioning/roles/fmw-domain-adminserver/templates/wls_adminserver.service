@@ -1,0 +1,12 @@
+[Unit]
+Description=WebLogic AdminServer service
+ 
+[Service]
+Type=simple
+WorkingDirectory={{ domain_home }}
+ExecStart={{ domain_home }}/startWebLogic.sh
+User={{ oracle_user }}
+Group={{ oracle_group }}
+ 
+[Install]
+WantedBy=multi-user.target

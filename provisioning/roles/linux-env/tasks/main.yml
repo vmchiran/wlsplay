@@ -6,10 +6,12 @@
     name: '*'
     state: latest
 
-# ==> Install tree, this is used for the wls automation demo
+# ==> Install some packages, mainly used for the wls automation demo
 - name: Install tree
   yum:
-    name: tree
+    name:
+      - tree
+      - unzip
     state: present
 
 # ==> Create user and group
