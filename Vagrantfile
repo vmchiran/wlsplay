@@ -74,7 +74,7 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
 
-  config.vm.define "was" do |machine|
+  config.vm.define "wls" do |machine|
     # Running on Ethernet adapter VirtualBox Host-Only Network #3
     machine.vm.network "private_network", ip: "172.16.0.10"
 

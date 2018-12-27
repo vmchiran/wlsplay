@@ -3,7 +3,7 @@
 ---
 
 - name: Configure CentOS7 with WebLogic 11g domain
-  hosts: was
+  hosts: wls
   become: yes
   roles:
     # Role for creating a base domain
